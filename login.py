@@ -31,7 +31,7 @@ class LoginScreen():
         self.login_button.pack()
 
     def login_validation(self):
-        real_password = "123"
+        real_password = ""
 
         salts = bcrypt.gensalt()
         real_password_hash = bcrypt.hashpw(real_password.encode('utf-8'), salts)
@@ -39,9 +39,15 @@ class LoginScreen():
         username = self.username_entry.get()
         password = self.password_entry.get()
 
+        self.username_entry.bind("<Return>", lambda event: self.login_validation())
+        self.password_entry.bind("<Return>", lambda event: self.login_validation())
+
         password_hash = bcrypt.hashpw(password.encode('utf-8'), salts)
 
         if username == "" and password_hash == real_password_hash:
+            print(real_password)
+            print(password_hash)
+            print(real_password_hash)
             messagebox.showinfo("Login", "Login efetuado com sucesso!")
             self.username_label.destroy()
             self.username_entry.destroy()
@@ -53,6 +59,13 @@ class LoginScreen():
             messagebox.showerror("Erro", "Login inválido. Verifique os dados e tente novamente.")
             self.username_entry.delete(0, tk.END)
             self.password_entry.delete(0, tk.END)
+            print(real_password)
+            print(password)
+            print(password_hash)
+            print(real_password_hash)
+
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()

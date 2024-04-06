@@ -38,6 +38,7 @@ class MainScreen():
         if messagebox.askyesno("Saída", "Você tem certeza que deseja sair?"):
             self.root.destroy()
 
+
 if __name__ == "__main__":
     root = tk.Tk()
     MainScreen(root)
