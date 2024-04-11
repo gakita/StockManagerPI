@@ -2,13 +2,16 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
+from commons import Commons
 
 
-class MainScreen():
-    def __init__(self, root_parameter):
+
+class MainScreen(Commons):
+    def __init__(self,root_parameter):
         self.root = root_parameter
         self.montar_tela_principal()
         self.design()
+        self.buttons_design()
         self.root.protocol("WM_DELETE_WINDOW", self.confirm_exit)
         self.root.mainloop()
 
@@ -18,25 +21,23 @@ class MainScreen():
         self.root.resizable(False, False)
         self.root.configure(background="#f9f6ee")
 
-    def design(self):
-        self.menu_bar = tk.Menu(self.root, tearoff=0)
-        self.cadastro_file = tk.Menu(self.menu_bar, tearoff=0)
-        self.cadastro_file.add_command(label="1-Cadastrar")
-        self.cadastro_file.add_command(label="2-Listar")
-        self.menu_bar.add_cascade(label="1-Cadastrar", menu=self.cadastro_file)
-        self.editar_file = tk.Menu(self.menu_bar, tearoff=0)
-        self.editar_file.add_command(label="1-Editar produtos")
-        self.editar_file.add_command(label="2-Editar fornecedores")
-        self.menu_bar.add_cascade(label="2-Editar", menu=self.editar_file)
-        self.menu_bar.add_command(label="3-Excluir")
-        self.menu_bar.add_command(label="4-Configuração")
-        self.menu_bar.add_command(label="5-Sair", command=self.confirm_exit)
+    def buttons_design(self):
+        consultar_button = Button(text="F1\nConsultar")
+        consultar_button.configure(background="black", foreground="white")
+        consultar_button.place(x=10, y=10, width=100, height=100)
+        nova_venda_button = self.tk.Button(text="F2\nNova Venda")
+        total_item_button = self.tk.Button(text="F3\nTotal do Item")
+        tabela_precos_button = self.tk.Button(text="F4\nTabela de preços")
+        quantidade_button = self.tk.Button(text="F5\nQuantidade")
+        valor_button = self.tk.Button(text="F6\nValor")
+        cancelar_item_button = self.tk.Button(text="F7\nCancelar Item")
+        excluir_venda_button = self.tk.Button(text="F8\nExcluir Venda")
 
-        self.root.config(menu=self.menu_bar)
 
-    def confirm_exit(self):
-        if messagebox.askyesno("Saída", "Você tem certeza que deseja sair?"):
-            self.root.destroy()
+
+
+
+
 
 
 if __name__ == "__main__":
